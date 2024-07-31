@@ -10,7 +10,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const Center(child: Text('Home', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('Events', style: TextStyle(fontSize: 24))),
+    const Center(
+        child: Text('Events', style: TextStyle(fontSize: 24))), //Eventos
     const Center(child: Text('Maps', style: TextStyle(fontSize: 24))),
   ];
 
