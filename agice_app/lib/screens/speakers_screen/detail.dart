@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'host.dart';
 
 class PantallaDetalle extends StatelessWidget {
@@ -11,17 +12,57 @@ class PantallaDetalle extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(presentador.nombre),
+        backgroundColor: Colors.grey[900],
       ),
-      body: Padding(
+      body: Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(16.0),
+        color: Colors.grey[850],
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Nombre: ${presentador.nombre}',
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text('Hora: ${presentador.hora}'),
-            Text('Biografía: ${presentador.biografia}'),
-            // Más información
+            Text(
+              'Ing. ${presentador.nombre}',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Una descripción muy corta.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Trabajo actual',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            CircleAvatar(
+              radius: 80,
+              backgroundImage: AssetImage(presentador.fotoUrl),
+            ),
+            const SizedBox(height: 24),
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.linkedin),
+              color: Colors.white,
+              iconSize: 40,
+              onPressed: () {
+                // Lógica para abrir el perfil de LinkedIn del presentador
+              },
+            ),
           ],
         ),
       ),
