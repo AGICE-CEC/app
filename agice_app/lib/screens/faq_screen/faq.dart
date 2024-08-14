@@ -10,7 +10,13 @@ class FAQPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Preguntas Frecuentes'),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start, // Alinea el texto a la izquierda
+              children: [
+              Text('Preguntas Frecuentes'),
+              ],
+            ),
+              backgroundColor: Color(0x1A1A1A),
               bottom: const TabBar(
                 tabs: [
                   Tab(text: 'Español'),
@@ -18,6 +24,17 @@ class FAQPage extends StatelessWidget {
                 ],
               ),
             ),
+            body: Container(
+                decoration: BoxDecoration(
+                gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                Color(0x232323), // Color inicial
+                Color(0x4A4A4A), // Color final
+              ],
+            ),
+          ),
             body: TabBarView(children: [
 /*******************************ESPAÑOL****************************************/
               ListView(
@@ -69,16 +86,23 @@ class FAQPage extends StatelessWidget {
 /*---------------------------------------------------------Container 1 empieza*/
                   Container(
                     margin: const EdgeInsets.all(8.0),
+                    color: Color(0x848484),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey, width: 1.0),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest1),
+                      title: Text(
+                        quest1,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans1),
+                          child: Text(
+                            ans1,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         ),
                       ],
                     ),
@@ -92,11 +116,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest2),
+                      title: Text(
+                        quest2,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans2),
+                          child: Text(
+                            ans2,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         ),
                       ],
                     ),
@@ -110,11 +140,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest3),
+                      title: Text(
+                        quest3,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans3),
+                          child: Text(
+                            ans3,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         ),
                       ],
                     ),
@@ -128,11 +164,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest4),
+                      title: Text(
+                        quest4,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans4),
+                          child: Text(
+                            ans4,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
@@ -146,11 +188,16 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest5),
+                      title: Text(
+                        quest5,
+                        style: TextStyle(color: Colors.black),
+                        ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans5),
+                          child: Text(
+                            ans5,
+                          style: TextStyle(color: Colors.black),),
                         ),
                       ],
                     ),
@@ -164,11 +211,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest6),
+                      title: Text(
+                        quest6,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans6),
+                          child: Text(
+                            ans6,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
@@ -182,11 +235,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest7),
+                      title: Text(
+                        quest7,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans7),
+                          child: Text(
+                            ans7,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
@@ -200,11 +259,17 @@ class FAQPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const ExpansionTile(
-                      title: Text(quest8),
+                      title: Text(
+                        quest8,
+                        style: TextStyle(color: Colors.black),
+                      ),
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(ans8),
+                          child: Text(
+                            ans8,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
@@ -222,11 +287,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest1_en),
+                    title: Text(
+                      quest1_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans1_en),
+                        child: Text(
+                          ans1_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -240,11 +311,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest2_en),
+                    title: Text(
+                      quest2_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans2_en),
+                        child: Text(
+                          ans2_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -258,11 +335,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest3_en),
+                    title: Text(
+                      quest3_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans3_en),
+                        child: Text(
+                          ans3_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -276,11 +359,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest4_en),
+                    title: Text(
+                      quest4_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans4_en),
+                        child: Text(
+                          ans4_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -294,11 +383,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest5_en),
+                    title: Text(
+                      quest5_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans5_en),
+                        child: Text(
+                          ans5_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -312,11 +407,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest6_en),
+                    title: Text(
+                      quest6_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans6_en),
+                        child: Text(
+                          ans6_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -330,11 +431,17 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest7_en),
+                    title: Text(
+                      quest7_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans7_en),
+                        child: Text(
+                          ans7_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -348,17 +455,27 @@ class FAQPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: const ExpansionTile(
-                    title: Text(quest8_en),
+                    title: Text(
+                      quest8_en,
+                      style: TextStyle(color: Colors.black),
+                    ),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(ans8_en),
+                        child: Text(  
+                          ans8_en,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
                 ),
 /*--------------------------------------------------------Container 8 Termina*/
-              ])
-            ])));
+              ]
+            )
+          ]
+        )
+      )
+    );
   }
 }
