@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -34,7 +33,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                 alignment: Alignment.topLeft,
                 color: Colors.black.withOpacity(0.5),
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.65,
+                height: MediaQuery.of(context).size.height * 0.60,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -45,7 +44,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                           flex: 2, // 20%
                           child: Container(
                             width: double.infinity,
-                            height: 50,
+                            height: MediaQuery.of(context).size.height * 0.06,
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                 image: AssetImage('assets/astronatua.png'),
@@ -72,7 +71,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                           flex: 8, // 80%
                           child: Container(
                             width: double.infinity,
-                            height: 50,
+                            height: MediaQuery.of(context).size.height * 0.055,
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                 image: AssetImage('assets/cec2024.png'),
@@ -96,22 +95,22 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    const Text(
+                    Text(
                       "Bienvenido al Congreso Espacial Centroamericano",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: MediaQuery.of(context).size.width * 0.054,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    const Text(
+                    Text(
                         "¡Promoviendo la colaboración en proyectos espaciales, uniendo a Centroamérica con el Espacio y el mundo!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 17,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontWeight: FontWeight.normal,
                         )),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.04),
@@ -171,42 +170,18 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                   },
                                   style: TextButton.styleFrom(
                                       backgroundColor: const Color(0xFF848484)),
-                                  child: const Text(
+                                  child: Text(
                                     "Registrate",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 25),
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.033),
                                   )),
                             ),
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.04),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: OutlinedButton(
-                                  onPressed: () async {
-                                    final url =
-                                        'https://www.ejemplo.com'; // Reemplaza con el enlace al que deseas redirigir
-                                    try {
-                                      if (await canLaunch(url)) {
-                                        await launch(url);
-                                      } else {
-                                        print(
-                                            'No se pudo abrir el enlace: $url');
-                                      }
-                                    } catch (e) {
-                                      print('Error al lanzar el enlace: $e');
-                                    }
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                      side: const BorderSide(
-                                          color: Colors.white, width: 1)),
-                                  child: const Text(
-                                    "Ver mas",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 25),
-                                  )),
-                            ),
                           ],
                         ))
                   ],
