@@ -164,8 +164,8 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                   onPressed: () {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
-                                      print(
-                                          "complete"); //aqui agregamos la funcion para llamar a la api
+                                      Navigator.of(context)
+                                          .pushReplacementNamed('/main');
                                     }
                                   },
                                   style: TextButton.styleFrom(
