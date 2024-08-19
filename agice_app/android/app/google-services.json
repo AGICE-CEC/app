@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "209861187648",
+    "project_id": "agiceapp",
+    "storage_bucket": "agiceapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209861187648:android:c6db2068949c4b546627a5",
+        "android_client_info": {
+          "package_name": "com.agice.agice_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0GdIA_DKU1FIqCZiBZZ0O6R9Vf2gSsdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
