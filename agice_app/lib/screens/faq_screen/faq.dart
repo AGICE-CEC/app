@@ -7,9 +7,33 @@
 
 import 'package:flutter/material.dart';
 import 'preg_resp.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class FAQPage extends StatelessWidget {
-  const FAQPage({super.key});
+class FAQPage extends StatefulWidget {
+  @override
+  _FAQPageState createState() => _FAQPageState();
+}
+
+class _FAQPageState extends State<FAQPage>{
+  Future<List<dynamic>>? faqs;
+
+  @override
+  void initState(){
+    super.initState();
+    faqs = fetchFaqs();
+  }
+
+  Future<List<dynamic>> fetchFaqs() async {
+    final String url = "https://server-production-2c4b.up.railway.app/faqs";
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception ('Failed to load FAQs');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +76,6 @@ class FAQPage extends StatelessWidget {
                   ),
                 ),
                 child: TabBarView(children: [
-/*******************************ESPAÑOL****************************************/
                   ListView(
                     children: [
 /*---------------------------------------------------------Container 1 empieza*/
