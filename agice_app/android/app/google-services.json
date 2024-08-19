@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "117913698284",
-    "project_id": "cecspace-e7ef6",
-    "storage_bucket": "cecspace-e7ef6.appspot.com"
+    "project_number": "209861187648",
+    "project_id": "agiceapp",
+    "storage_bucket": "agiceapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:117913698284:android:4d20587013493180a90ac9",
+        "mobilesdk_app_id": "1:209861187648:android:c6db2068949c4b546627a5",
         "android_client_info": {
           "package_name": "com.agice.agice_app"
         }
@@ -15,45 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAq1RvnBln90WHMMKfi3oZqaIS18O0fDqk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:117913698284:android:090afcc9d9be58d7a90ac9",
-        "android_client_info": {
-          "package_name": "com.agice.cecspace"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAq1RvnBln90WHMMKfi3oZqaIS18O0fDqk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:117913698284:android:cc449814a6ec6ab9a90ac9",
-        "android_client_info": {
-          "package_name": "com.example.agice_app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAq1RvnBln90WHMMKfi3oZqaIS18O0fDqk"
+          "current_key": "AIzaSyA0GdIA_DKU1FIqCZiBZZ0O6R9Vf2gSsdg"
         }
       ],
       "services": {

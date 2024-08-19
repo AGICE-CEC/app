@@ -5,15 +5,25 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Asegúrate de que Flutter esté inicializado
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    // Inicialización de Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  OneSignal.initialize("1cb74d81-5e43-411f-bb8a-22828e6d385a");
-  OneSignal.Notifications.requestPermission(true);
-  runApp(const MyApp());
+    // Inicialización de OneSignal
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    OneSignal.initialize("0b71d6cd-e5da-4c6f-abde-cd8456476acf");
+    OneSignal.Notifications.requestPermission(true); // Elimina await aquí
 
+    // Inicia la aplicación
+    runApp(MyApp());
+  } catch (e, stacktrace) {
+    // Manejo de errores
+    print("Error al inicializar Firebase o OneSignal: $e");
+    print("Stacktrace: $stacktrace");
+  }
 }
