@@ -6,17 +6,17 @@ class PantallaAcordeon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3, // Tres pestañas para tres días
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: const Text('Presentadores', style: TextStyle(color: Colors.white)),
           bottom: const TabBar(
-            labelColor: Colors.white, // Color de los tabs activos
-            unselectedLabelColor: Colors.grey, // Color de los tabs inactivos
-            indicatorColor: Colors.white, // Color del indicador debajo del tab
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.grey,
+            indicatorColor: Colors.white,
             labelStyle: TextStyle(
-              fontWeight: FontWeight.bold, // Poner el texto en negrita
+              fontWeight: FontWeight.bold,
             ),
             tabs: [
               Tab(text: 'Día 1'),
@@ -28,7 +28,7 @@ class PantallaAcordeon extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(74, 74, 74, 1.0),
         body: const Column(
           children: [
-            SizedBox(height: 8.0), // Espacio entre TabBar y contenido
+            SizedBox(height: 8.0),
             Expanded(
               child: TabBarView(
                 children: [
@@ -45,14 +45,40 @@ class PantallaAcordeon extends StatelessWidget {
   }
 }
 
-class ListaPresentadores extends StatelessWidget {
+class ListaPresentadores extends StatefulWidget {
   final String dia;
 
   const ListaPresentadores({required this.dia});
 
-  // Función para determinar el color del texto según el número del salón
+  @override
+  _ListaPresentadoresState createState() => _ListaPresentadoresState();
+}
+
+class _ListaPresentadoresState extends State<ListaPresentadores> {
+  List<Presentador> presentadores = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPresentadores();
+  }
+
+  Future<void> fetchPresentadores() async {
+    try {
+      List<Presentador> lista = await Presentador.buildSpeakersList();
+      setState(() {
+        presentadores = lista.where((p) => p.dia == widget.dia).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   Color getTextColorForSalon(String salon) {
-    // Extraer el número del salón
     final salonNumber = int.tryParse(salon.split('-')[1]) ?? 0;
     switch (salonNumber.toString()[0]) {
       case '1':
@@ -70,20 +96,18 @@ class ListaPresentadores extends StatelessWidget {
       case '7':
         return const Color.fromRGBO(134, 42, 132, 1.0);
       default:
-        return Colors
-            .black; // Color por defecto si el número no está en el rango de 1 a 7
+        return Colors.black;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Filtrar los presentadores según el día
-    final List<Presentador> presentadoresDelDia =
-        presentadores.where((p) => p.dia == dia).toList();
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-    // Agrupar los presentadores por hora
     final Map<String, List<Presentador>> presentadoresPorHora = {};
-    for (var presentador in presentadoresDelDia) {
+    for (var presentador in presentadores) {
       if (presentadoresPorHora.containsKey(presentador.hora)) {
         presentadoresPorHora[presentador.hora]!.add(presentador);
       } else {
@@ -167,84 +191,3 @@ class ListaPresentadores extends StatelessWidget {
     );
   }
 }
-
-List<Presentador> presentadores = [
-  Presentador(
-    nombre: 'Juan Pérez',
-    hora: '9:00 a.m',
-    descripcion: 'Descripción de Juan...',
-    biografia: 'Biografía de Juan...',
-    dia: 'Día 1',
-    salon: 'CIT-123',
-    fotoUrl: 'https://example.com/juan.jpg',
-    trabajoActual: 'Ingeniero de Software',
-    linkedinUrl: 'https://linkedin.com/in/juanperez',
-  ),
-  Presentador(
-    nombre: 'Ana Gómez 2',
-    hora: '9:00 a.m',
-    descripcion: 'Descripción de Ana...',
-    biografia: 'Biografía de Ana...',
-    dia: 'Día 2',
-    salon: 'CIT-256',
-    fotoUrl: 'https://example.com/ana.jpg',
-    trabajoActual: 'Consultora',
-    linkedinUrl: 'https://linkedin.com/in/anagomez',
-  ),
-  Presentador(
-    nombre: 'Ana Gómez',
-    hora: '9:00 a.m',
-    descripcion: 'Descripción de Ana...',
-    biografia: 'Biografía de Ana...',
-    dia: 'Día 1',
-    salon: 'CIT-356',
-    fotoUrl: 'https://example.com/ana.jpg',
-    trabajoActual: 'Consultora',
-    linkedinUrl: 'https://linkedin.com/in/anagomez',
-  ),
-  Presentador(
-    nombre: 'Juan Pérez',
-    hora: '10:00 a.m',
-    descripcion: 'Descripción de Juan...',
-    biografia: 'Biografía de Juan...',
-    dia: 'Día 1',
-    salon: 'CIT-423',
-    fotoUrl: 'https://example.com/juan.jpg',
-    trabajoActual: 'Ingeniero de Software',
-    linkedinUrl: 'https://linkedin.com/in/juanperez',
-  ),
-  Presentador(
-    nombre: 'Ana Gómez 2',
-    hora: '10:00 a.m',
-    descripcion: 'Descripción de Ana...',
-    biografia: 'Biografía de Ana...',
-    dia: 'Día 1',
-    salon: 'CIT-556',
-    fotoUrl: 'https://example.com/ana.jpg',
-    trabajoActual: 'Consultora',
-    linkedinUrl: 'https://linkedin.com/in/anagomez',
-  ),
-  Presentador(
-    nombre: 'Ana Gómez',
-    hora: '11:00 p.m',
-    descripcion: 'Descripción de Ana...',
-    biografia: 'Biografía de Ana...',
-    dia: 'Día 1',
-    salon: 'CIT-656',
-    fotoUrl: 'https://example.com/ana.jpg',
-    trabajoActual: 'Consultora',
-    linkedinUrl: 'https://linkedin.com/in/anagomez',
-  ),
-  Presentador(
-    nombre: 'Ana Gómez',
-    hora: '12:00 p.m',
-    descripcion: 'Descripción de Ana...',
-    biografia: 'Biografía de Ana...',
-    dia: 'Día 1',
-    salon: 'CIT-756',
-    fotoUrl: 'https://example.com/ana.jpg',
-    trabajoActual: 'Consultora',
-    linkedinUrl: 'https://linkedin.com/in/anagomez',
-  ),
-  // ...
-];
