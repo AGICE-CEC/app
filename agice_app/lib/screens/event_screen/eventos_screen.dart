@@ -20,8 +20,8 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eventos', style: TextStyle(fontFamily: 'Roboto')),
-        backgroundColor: Colors.black, 
+        title: Text('Eventos', style: TextStyle(fontFamily: 'Roboto', color: Colors.white)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0), 
         actions: [
           IconButton(
             icon: Icon(Icons.help_outline), 
