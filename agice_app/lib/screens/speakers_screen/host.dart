@@ -3,19 +3,17 @@ import 'package:http/http.dart' as http;
 
 class Presentador {
   String nombre;
-  String hora;
+  String pais;
   String descripcion;
-  String dia;
-  String salon;
+  String contacto;
   String fotoUrl;
   String linkedinUrl;
 
   Presentador({
     required this.nombre,
-    required this.hora,
+    required this.pais,
     required this.descripcion,
-    required this.dia,
-    required this.salon,
+    required this.contacto,
     required this.fotoUrl,
     required this.linkedinUrl,
   });
@@ -31,10 +29,9 @@ class Presentador {
       return data.map((json) {
         return Presentador(
           nombre: json['speakerName'],
-          hora: '12:00 p.m',
+          pais: json['country'],
           descripcion: json['speakerDescription'],
-          dia: 'Día 1',
-          salon: 'CIT-123',
+          contacto: json['contact'],
           fotoUrl: json['speakerImage'],
           linkedinUrl: json['linkedIn'],
         );
