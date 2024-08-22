@@ -2,54 +2,7 @@ import 'package:agice_app/screens/speakers_screen/detail.dart';
 import 'package:agice_app/screens/speakers_screen/host.dart';
 import 'package:flutter/material.dart';
 
-class PantallaAcordeon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text('Presentadores', style: TextStyle(color: Colors.white)),
-          bottom: const TabBar(
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.white,
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: [
-              Tab(text: 'Día 1'),
-              Tab(text: 'Día 2'),
-              Tab(text: 'Día 3'),
-            ],
-          ),
-        ),
-        backgroundColor: const Color.fromRGBO(74, 74, 74, 1.0),
-        body: const Column(
-          children: [
-            SizedBox(height: 8.0),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  ListaPresentadores(dia: 'Día 1'),
-                  ListaPresentadores(dia: 'Día 2'),
-                  ListaPresentadores(dia: 'Día 3'),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ListaPresentadores extends StatefulWidget {
-  final String dia;
-
-  const ListaPresentadores({required this.dia});
-
   @override
   _ListaPresentadoresState createState() => _ListaPresentadoresState();
 }
@@ -68,7 +21,7 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
     try {
       List<Presentador> lista = await Presentador.buildSpeakersList();
       setState(() {
-        presentadores = lista.where((p) => p.dia == widget.dia).toList();
+        presentadores = lista;
         isLoading = false;
       });
     } catch (e) {
@@ -106,88 +59,82 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    final Map<String, List<Presentador>> presentadoresPorHora = {};
-    for (var presentador in presentadores) {
-      if (presentadoresPorHora.containsKey(presentador.hora)) {
-        presentadoresPorHora[presentador.hora]!.add(presentador);
-      } else {
-        presentadoresPorHora[presentador.hora] = [presentador];
-      }
-    }
-
-    return ListView(
-      children: presentadoresPorHora.keys.map((hora) {
-        final list = presentadoresPorHora[hora]!;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                hora,
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
-              ),
+    return ListView.builder(
+      padding: const EdgeInsets.all(12.0), // Añade margen alrededor de la lista
+      itemCount: presentadores.length,
+      itemBuilder: (context, index) {
+        final presentador = presentadores[index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Container(
+            width: double.infinity,
+            padding:
+                const EdgeInsets.all(0.0), // Sin margen interno para la foto
+            decoration: BoxDecoration(
+              color: Colors.grey[700],
+              borderRadius: BorderRadius.circular(12.0),
             ),
-            ...list.map((presentador) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(6.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[700],
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          presentador.nombre,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        subtitle: Text(
-                          'Descripción: ${presentador.descripcion}',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PantallaDetalle(presentador: presentador),
-                            ),
-                          );
-                        },
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(12.0),
+                    bottomLeft: Radius.circular(12.0),
+                  ),
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(presentador.fotoUrl),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          bottomRight: Radius.circular(12.0),
-                          topLeft: Radius.circular(12.0),
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 4.0),
-                          color: Colors.white,
-                          child: Text(
-                            presentador.salon,
-                            style: TextStyle(
-                                color: getTextColorForSalon(presentador.salon)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              );
-            }),
-          ],
+                Expanded(
+                  child: ListTile(
+                    title: Text(
+                      presentador.nombre,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      presentador.descripcion,
+                      style: const TextStyle(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PantallaDetalle(presentador: presentador),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         );
-      }).toList(),
+      },
+    );
+  }
+}
+
+class PantallaPresentadores extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title:
+            const Text('Presentadores', style: TextStyle(color: Colors.white)),
+      ),
+      backgroundColor: const Color.fromRGBO(74, 74, 74, 1.0),
+      body: ListaPresentadores(),
     );
   }
 }

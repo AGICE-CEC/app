@@ -12,19 +12,26 @@ class PantallaDetalle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(presentador.nombre),
+        title: Text(presentador.nombre,
+            style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.grey[900],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        color: Colors.grey[850],
+        color: const Color.fromRGBO(84, 84, 84, 1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Ing. ${presentador.nombre}',
+              presentador.nombre,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -44,8 +51,7 @@ class PantallaDetalle extends StatelessWidget {
             const SizedBox(height: 16),
             CircleAvatar(
               radius: 80,
-              backgroundImage: NetworkImage(
-                  presentador.fotoUrl),
+              backgroundImage: NetworkImage(presentador.fotoUrl),
             ),
             const SizedBox(height: 24),
             IconButton(
