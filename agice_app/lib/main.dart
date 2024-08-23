@@ -12,7 +12,7 @@ void main() async {
   );
 
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  OneSignal.initialize("0b71d6cd-e5da-4c6f-abde-cd8456476acf");
+  OneSignal.initialize("1cb74d81-5e43-411f-bb8a-22828e6d385a");
   OneSignal.Notifications.requestPermission(true);
 
   runApp(MyApp());
