@@ -50,11 +50,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA0GdIA_DKU1FIqCZiBZZ0O6R9Vf2gSsdg',
-    appId: '1:209861187648:android:c6db2068949c4b546627a5',
-    messagingSenderId: '209861187648',
-    projectId: 'agiceapp',
-    storageBucket: 'agiceapp.appspot.com',
+    apiKey: 'AIzaSyAq1RvnBln90WHMMKfi3oZqaIS18O0fDqk',
+    appId: '1:117913698284:android:4d20587013493180a90ac9',
+    messagingSenderId: '117913698284',
+    projectId: 'cecspace-e7ef6',
+    storageBucket: 'cecspace-e7ef6.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
