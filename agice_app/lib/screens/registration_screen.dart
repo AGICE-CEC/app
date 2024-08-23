@@ -1,4 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+Future<bool> verificarEmail(String email) async {
+  final url = Uri.parse(
+      'https://server-production-2c4b.up.railway.app/attendees/$email');
+
+  try {
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -31,10 +49,12 @@ class _RegistrationScreen extends State<RegistrationScreen> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   double containerHeight = constraints.maxHeight * 0.6;
-                  if (containerHeight > 460) {
-                    containerHeight = 460;
+                  if (containerHeight > 660) {
+                    containerHeight = 660;
                   } else if (containerHeight < 450) {
                     containerHeight = 450;
+                  } else if (containerHeight > 450 && containerHeight < 460) {
+                    containerHeight = 460;
                   }
 
                   return Container(
@@ -166,11 +186,17 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                 width: constraints.maxWidth * 0.8,
                                 height: constraints.maxHeight * 0.06,
                                 child: TextButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
-                                      Navigator.of(context)
-                                          .pushReplacementNamed('/main');
+                                      final email = _emailController.text;
+                                      final emailValido =
+                                          await verificarEmail(email);
+                                      if (emailValido) {
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.of(context)
+                                            .pushReplacementNamed('/main');
+                                      }
                                     }
                                   },
                                   style: TextButton.styleFrom(
