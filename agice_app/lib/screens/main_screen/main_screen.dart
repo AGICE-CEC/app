@@ -16,12 +16,6 @@ class _MainScreenState extends State<MainScreen> {
         style: TextStyle(fontSize: 24),
       ),
     ),
-    const Center(
-      child: Text(
-        'Events',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
     MainSpeakerScreen(),
     const Center(
       child: Text(
@@ -50,10 +44,6 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
             label: 'Events',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.groups),
-            label: 'Speakers',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
