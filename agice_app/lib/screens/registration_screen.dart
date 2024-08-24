@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> verificarEmail(String email) async {
   final url = Uri.parse(
@@ -193,6 +194,9 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                       final emailValido =
                                           await verificarEmail(email);
                                       if (emailValido) {
+                                        final prefs = await SharedPreferences
+                                            .getInstance();
+                                        await prefs.setBool('isLogin', true);
                                         // ignore: use_build_context_synchronously
                                         Navigator.of(context)
                                             .pushReplacementNamed('/main');
