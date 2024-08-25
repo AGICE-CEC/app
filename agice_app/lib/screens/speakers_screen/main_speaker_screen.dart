@@ -1,5 +1,5 @@
+import 'package:agice_app/screens/speakers_screen/acordeon.dart';
 import 'package:flutter/material.dart';
-import 'acordeon.dart';
 
 class MainSpeakerScreen extends StatelessWidget {
   const MainSpeakerScreen({super.key});
@@ -11,7 +11,7 @@ class MainSpeakerScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PantallaAcordeon(),
+      home: PantallaPresentadores(),
     );
   }
 }

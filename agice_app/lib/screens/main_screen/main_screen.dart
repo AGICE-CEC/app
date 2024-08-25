@@ -1,3 +1,4 @@
+import 'package:agice_app/screens/map_screen.dart';
 import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
 import 'package:flutter/material.dart';
 import '../event_screen/main_event_screen.dart';
@@ -30,10 +31,12 @@ class _MainScreenState extends State<MainScreen> {
     const MainSpeakerScreen(),
     const Center(
       child: Text(
-        'Maps',
+        'Events',
         style: TextStyle(fontSize: 24),
       ),
     ),
+    MainSpeakerScreen(),
+    const MapScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -57,12 +60,20 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Events',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.groups),
+            label: 'Speakers',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Maps',
           ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black,
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
       ),
     );
   }
