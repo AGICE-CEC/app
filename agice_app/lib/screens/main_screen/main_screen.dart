@@ -1,5 +1,6 @@
 import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
 import 'package:flutter/material.dart';
+import '../event_screen/main_event_screen.dart'; 
 
 class MainScreen extends StatefulWidget {
   @override
@@ -10,6 +11,13 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
+    MainEventsScreen(), 
+    const Center(
+      child: Text(
+        'Events',
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
     const Center(
       child: Text(
         'Home',

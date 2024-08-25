@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import '../screens/event_screen/main_event_screen.dart';
 import '../screens/speakers_screen/main_speaker_screen.dart';
 import '../screens/welcome_screen.dart';
 import '../screens/registration_screen.dart';
@@ -8,6 +10,7 @@ class AppRoutes {
     '/': (context) => const WelcomeScreen(),
     '/registration': (context) => const RegistrationScreen(),
     '/main': (context) => MainScreen(),
+    '/events': (context) => MainEventsScreen(),
     '/speakers': (context) => MainSpeakerScreen(),
   };
 }
