@@ -3,7 +3,10 @@ import 'event_page_screen.dart';
 import 'statement.dart';
 
 class EventsPage extends StatefulWidget {
+  const EventsPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _EventsPageState createState() => _EventsPageState();
 }
 
@@ -20,11 +23,12 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eventos', style: TextStyle(fontFamily: 'Roboto', color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0), 
+        title: const Text('Eventos',
+            style: TextStyle(fontFamily: 'Roboto', color: Colors.white)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         actions: [
           IconButton(
-            icon: Icon(Icons.help_outline), 
+            icon: const Icon(Icons.help_outline),
             onPressed: () {
               // Acción al presionar el icono
             },
@@ -35,11 +39,11 @@ class _EventsPageState extends State<EventsPage> {
         future: futureEvents,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No events found'));
+            return const Center(child: Text('No events found'));
           }
 
           var eventsByDay = snapshot.data!;
@@ -49,9 +53,11 @@ class _EventsPageState extends State<EventsPage> {
             child: Column(
               children: [
                 Container(
-                  color: Colors.black, 
+                  color: Colors.black,
                   child: TabBar(
-                    tabs: eventsByDay.map((dayEvent) => Tab(text: 'Día ${dayEvent.day}')).toList(),
+                    tabs: eventsByDay
+                        .map((dayEvent) => Tab(text: 'Día ${dayEvent.day}'))
+                        .toList(),
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.grey,
                     indicatorColor: Colors.white,
@@ -59,7 +65,7 @@ class _EventsPageState extends State<EventsPage> {
                 ),
                 Expanded(
                   child: Container(
-                    color: Colors.grey.shade900, 
+                    color: Colors.grey.shade900,
                     child: TabBarView(
                       children: eventsByDay.map((dayEvent) {
                         return ListView.builder(
@@ -78,7 +84,7 @@ class _EventsPageState extends State<EventsPage> {
                                         horizontal: 16.0, vertical: 8.0),
                                     child: Text(
                                       event.hour,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: 'Roboto',
@@ -90,30 +96,32 @@ class _EventsPageState extends State<EventsPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => EventPageScreen(eventId: event.eventId),
+                                        builder: (context) => EventPageScreen(
+                                            eventId: event.eventId),
                                       ),
                                     );
                                   },
                                   borderRadius: BorderRadius.circular(8.0),
-                                  splashColor: Colors.grey.shade800, // Color al hacer click
+                                  splashColor: Colors
+                                      .grey.shade800, // Color al hacer click
                                   child: Container(
-                                    width: double.infinity, 
-                                    margin: EdgeInsets.symmetric(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 8.0),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey.shade800, 
+                                      color: Colors.grey.shade800,
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: Stack(
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0, 
-                                            vertical: 24.0, 
+                                            horizontal: 16.0,
+                                            vertical: 24.0,
                                           ),
                                           child: Text(
                                             event.title,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 16.0,
                                               color: Colors.white,
                                               fontFamily: 'Roboto',

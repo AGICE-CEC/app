@@ -4,9 +4,10 @@ import 'statement.dart';
 class EventPageScreen extends StatefulWidget {
   final int eventId;
 
-  EventPageScreen({required this.eventId});
+  const EventPageScreen({super.key, required this.eventId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _EventPageScreenState createState() => _EventPageScreenState();
 }
 
@@ -26,7 +27,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), // Icono para regresar
+          icon: const Icon(Icons.arrow_back), // Icono para regresar
           onPressed: () {
             Navigator.pop(context); // Acción para regresar a la vista anterior
           },
@@ -36,11 +37,11 @@ class _EventPageScreenState extends State<EventPageScreen> {
         future: futureEventDetail,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('Event not found'));
+            return const Center(child: Text('Event not found'));
           }
 
           var event = snapshot.data!;
@@ -52,39 +53,39 @@ class _EventPageScreenState extends State<EventPageScreen> {
               children: [
                 Text(
                   event.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Row(
                   children: [
-                    Icon(Icons.access_time, color: Colors.white),
-                    SizedBox(width: 8.0),
+                    const Icon(Icons.access_time, color: Colors.white),
+                    const SizedBox(width: 8.0),
                     Text(
                       '${event.hour}, Día ${event.day}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Text(
                   event.description,
-                  style: TextStyle(color: Colors.white70),
+                  style: const TextStyle(color: Colors.white70),
                 ),
-                SizedBox(height: 24.0),
-                Text(
+                const SizedBox(height: 24.0),
+                const Text(
                   'Impartido por',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade800,
                     borderRadius: BorderRadius.circular(8.0),
@@ -98,18 +99,18 @@ class _EventPageScreenState extends State<EventPageScreen> {
                             backgroundImage: NetworkImage(speaker.image),
                             radius: 30,
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           Text(
                             speaker.name,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ],
                       );
                     }).toList(),
                   ),
                 ),
-                SizedBox(height: 24.0),
+                const SizedBox(height: 24.0),
                 Container(
                   width: double.infinity,
                   height: 200.0,
@@ -117,13 +118,14 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                     color: Colors.grey.shade800,
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(Icons.map, color: Colors.white, size: 50.0),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 8.0),
                   decoration: BoxDecoration(
                     color: Colors.teal,
                     borderRadius: BorderRadius.circular(8.0),
@@ -133,14 +135,14 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     children: [
                       Text(
                         event.room,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 8.0),
-                      Icon(Icons.help_outline, color: Colors.white),
+                      const SizedBox(width: 8.0),
+                      const Icon(Icons.help_outline, color: Colors.white),
                     ],
                   ),
                 ),

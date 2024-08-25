@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'eventos_screen.dart';
 
 class MainEventsScreen extends StatelessWidget {
+  const MainEventsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -9,7 +11,7 @@ class MainEventsScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: EventsPage(),
+      home: const EventsPage(),
     );
   }
 }
