@@ -17,6 +17,12 @@ class _MainScreenState extends State<MainScreen> {
         style: TextStyle(fontSize: 24),
       ),
     ),
+    const Center(
+      child: Text(
+        'Events',
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
     MainSpeakerScreen(),
     const MapScreen()
   ];
@@ -42,12 +48,20 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Events',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.groups),
+            label: 'Speakers',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Maps',
           ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black,
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
       ),
     );
   }
