@@ -5,7 +5,7 @@ import 'host.dart';
 class PantallaDetalle extends StatelessWidget {
   final Presentador presentador;
 
-  PantallaDetalle({Key? key, required this.presentador}) : super(key: key);
+  const PantallaDetalle({super.key, required this.presentador});
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,8 @@ import 'package:agice_app/screens/speakers_screen/host.dart';
 import 'package:flutter/material.dart';
 
 class PantallaAcordeon extends StatelessWidget {
+  const PantallaAcordeon({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -10,7 +12,8 @@ class PantallaAcordeon extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: const Text('Presentadores', style: TextStyle(color: Colors.white)),
+          title: const Text('Presentadores',
+              style: TextStyle(color: Colors.white)),
           bottom: const TabBar(
             labelColor: Colors.white, // Color de los tabs activos
             unselectedLabelColor: Colors.grey, // Color de los tabs inactivos
@@ -48,7 +51,7 @@ class PantallaAcordeon extends StatelessWidget {
 class ListaPresentadores extends StatelessWidget {
   final String dia;
 
-  const ListaPresentadores({required this.dia});
+  const ListaPresentadores({super.key, required this.dia});
 
   // Función para determinar el color del texto según el número del salón
   Color getTextColorForSalon(String salon) {

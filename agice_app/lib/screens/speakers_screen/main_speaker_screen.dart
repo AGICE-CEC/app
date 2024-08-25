@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'acordeon.dart';
 
 class MainSpeakerScreen extends StatelessWidget {
+  const MainSpeakerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -9,7 +11,7 @@ class MainSpeakerScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PantallaAcordeon(),
+      home: const PantallaAcordeon(),
     );
   }
 }
