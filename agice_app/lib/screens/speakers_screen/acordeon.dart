@@ -3,7 +3,10 @@ import 'package:agice_app/screens/speakers_screen/host.dart';
 import 'package:flutter/material.dart';
 
 class ListaPresentadores extends StatefulWidget {
+  const ListaPresentadores({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ListaPresentadoresState createState() => _ListaPresentadoresState();
 }
 
@@ -77,7 +80,7 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12.0),
                     bottomLeft: Radius.circular(12.0),
                   ),
@@ -125,6 +128,8 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
 }
 
 class PantallaPresentadores extends StatelessWidget {
+  const PantallaPresentadores({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +139,7 @@ class PantallaPresentadores extends StatelessWidget {
             const Text('Presentadores', style: TextStyle(color: Colors.white)),
       ),
       backgroundColor: const Color.fromRGBO(74, 74, 74, 1.0),
-      body: ListaPresentadores(),
+      body: const ListaPresentadores(),
     );
   }
 }

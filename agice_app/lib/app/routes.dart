@@ -9,8 +9,6 @@ class AppRoutes {
   static final routes = {
     '/': (context) => const WelcomeScreen(),
     '/registration': (context) => const RegistrationScreen(),
-    '/main': (context) => MainScreen(),
-    '/speakers': (context) => MainSpeakerScreen(),
     '/mapa': (context) => const MapScreen(),
     '/main': (context) => const MainScreen(),
     '/events': (context) => const MainEventsScreen(),

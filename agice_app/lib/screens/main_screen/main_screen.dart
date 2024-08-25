@@ -1,3 +1,4 @@
+import 'package:agice_app/screens/faq_screen/faq.dart';
 import 'package:agice_app/screens/map_screen.dart';
 import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,27 +17,9 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const MainEventsScreen(),
-    const Center(
-      child: Text(
-        'Events',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
-    const Center(
-      child: Text(
-        'Home',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
     const MainSpeakerScreen(),
-    const Center(
-      child: Text(
-        'Events',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
-    MainSpeakerScreen(),
-    const MapScreen()
+    const MapScreen(),
+    const FAQPage()
   ];
 
   void _onItemTapped(int index) {
@@ -52,10 +35,6 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.event),
             label: 'Events',
           ),
@@ -66,6 +45,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Maps',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.question_answer),
+            label: 'FAQ',
           ),
         ],
         currentIndex: _selectedIndex,

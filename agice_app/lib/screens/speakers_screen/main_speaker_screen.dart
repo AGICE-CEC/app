@@ -11,7 +11,7 @@ class MainSpeakerScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PantallaPresentadores(),
+      home: const PantallaPresentadores(),
     );
   }
 }
