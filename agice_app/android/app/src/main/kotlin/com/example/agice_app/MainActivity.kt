@@ -1,4 +1,4 @@
-package com.example.agice_app
+package com.agice.agice_app
 
 import io.flutter.embedding.android.FlutterActivity
 
