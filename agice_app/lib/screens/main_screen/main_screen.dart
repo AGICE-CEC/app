@@ -1,3 +1,4 @@
+import 'package:agice_app/screens/map_screen.dart';
 import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +18,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ),
     MainSpeakerScreen(),
-    const Center(
-      child: Text(
-        'Maps',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
+   MapScreen()
   ];
 
   void _onItemTapped(int index) {
