@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ),
     MainSpeakerScreen(),
-   MapScreen()
+    const MapScreen()
   ];
 
   void _onItemTapped(int index) {
