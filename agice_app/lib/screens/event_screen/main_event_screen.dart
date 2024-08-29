@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'routes.dart';
+import 'eventos_screen.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainEventsScreen extends StatelessWidget {
+  const MainEventsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome App',
+      title: 'Eventos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: AppRoutes.routes,
+      home: const EventsPage(),
     );
   }
 }
