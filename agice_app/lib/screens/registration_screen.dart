@@ -59,21 +59,12 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                 alignment: Alignment.bottomCenter,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    double containerHeight = constraints.maxHeight * 0.65;
-                    if (containerHeight > 660) {
-                      containerHeight = 680;
-                    } else if (containerHeight < 450) {
-                      containerHeight = 450;
-                    } else if (containerHeight > 450 && containerHeight < 460) {
-                      containerHeight = 460;
-                    }
-
                     return Container(
-                      alignment: Alignment.topLeft,
                       color: Colors.black.withOpacity(0.5),
-                      width: double.infinity,
-                      height: containerHeight,
+                      constraints: const BoxConstraints.tightFor(
+                          width: double.infinity, height: null),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: constraints.maxHeight * 0.02),
@@ -262,7 +253,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: constraints.maxHeight * 0.03),
+                                const SizedBox(height: 50),
                               ],
                             ),
                           ),
