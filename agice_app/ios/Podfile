@@ -40,6 +40,7 @@ end
 target 'OneSignalNotificationServiceExtension' do
   use_frameworks!
   pod 'OneSignalXCFramework', '>= 5.0.0', '< 6.0'
+  # If your app does not use CoreLocation, you can remove this:
 end
 
 post_install do |installer|
