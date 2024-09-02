@@ -1,9 +1,43 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<bool> verificarEmail(String email) async {
+void showFlashError(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: SizedBox(
+        height: 30, // Adjust the height as needed
+        child: Row(
+          children: [
+            const Icon(Icons.error, color: Colors.white),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+                overflow: TextOverflow.visible,
+              ),
+            ),
+          ],
+        ),
+      ),
+      backgroundColor: Colors.black.withOpacity(0.5),
+      duration: const Duration(seconds: 3),
+      action: SnackBarAction(
+        label: 'Dismiss',
+        textColor: Colors.black,
+        backgroundColor: Colors.white,
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        },
+      ),
+    ),
+  );
+}
+
+Future<String?> verificarEmail(String email) async {
   final url = Uri.parse(
       'https://server-production-2c4b.up.railway.app/attendees/$email');
 
@@ -11,12 +45,20 @@ Future<bool> verificarEmail(String email) async {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      return true;
+      return null; // Sin errores
+    } else if (response.statusCode == 400) {
+      return 'Solicitud inválida. Verifica los datos e intenta nuevamente.';
+    } else if (response.statusCode == 401) {
+      return 'Usuario no autenticado. Verifica tus credenciales.';
+    } else if (response.statusCode == 500) {
+      return 'Error en el servidor. Intenta nuevamente más tarde.';
     } else {
-      return false;
+      return 'Error inesperado:';
     }
+  } on SocketException {
+    return 'No tienes conexión a Internet.';
   } catch (e) {
-    return false;
+    return 'Ocurrió un error inesperado: $e';
   }
 }
 
@@ -195,15 +237,18 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                       if (_formKey.currentState?.validate() ??
                                           false) {
                                         final email = _emailController.text;
-                                        final emailValido =
+                                        final error =
                                             await verificarEmail(email);
-                                        if (emailValido) {
+                                        if (error == null) {
                                           final prefs = await SharedPreferences
                                               .getInstance();
                                           await prefs.setBool('isLogin', true);
                                           // ignore: use_build_context_synchronously
                                           Navigator.of(context)
                                               .pushReplacementNamed('/main');
+                                        } else {
+                                          // ignore: use_build_context_synchronously
+                                          showFlashError(context, error);
                                         }
                                       }
                                     },
