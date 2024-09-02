@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void showFlashError(BuildContext context, String message) {
+void showFlashError(
+    BuildContext context, String message, double height_father) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: SizedBox(
-        height: 30, // Adjust the height as needed
+        height: 40, // Adjust the height as needed
         child: Row(
           children: [
             const Icon(Icons.error, color: Colors.white),
@@ -16,12 +17,16 @@ void showFlashError(BuildContext context, String message) {
             Expanded(
               child: Text(
                 message,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
                 overflow: TextOverflow.visible,
               ),
             ),
           ],
         ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(
+        bottom: height_father,
       ),
       backgroundColor: Colors.black.withOpacity(0.5),
       duration: const Duration(seconds: 3),
@@ -57,8 +62,10 @@ Future<String?> verificarEmail(String email) async {
     }
   } on SocketException {
     return 'No tienes conexión a Internet.';
+  } on http.ClientException {
+    return 'Tienes error en tu conexion de red';
   } catch (e) {
-    return 'Ocurrió un error inesperado: $e';
+    return '$e';
   }
 }
 
@@ -101,6 +108,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                 alignment: Alignment.bottomCenter,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
+                    double containerHeight = constraints.maxHeight * 0.8;
                     return Container(
                       color: Colors.black.withOpacity(0.5),
                       constraints: const BoxConstraints.tightFor(
@@ -248,7 +256,8 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                               .pushReplacementNamed('/main');
                                         } else {
                                           // ignore: use_build_context_synchronously
-                                          showFlashError(context, error);
+                                          showFlashError(
+                                              context, error, containerHeight);
                                         }
                                       }
                                     },
