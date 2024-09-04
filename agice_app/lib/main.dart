@@ -10,10 +10,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  runApp(const MyApp());
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize("1cb74d81-5e43-411f-bb8a-22828e6d385a");
   OneSignal.Notifications.requestPermission(true);
-  runApp(const MyApp());
-
 }
