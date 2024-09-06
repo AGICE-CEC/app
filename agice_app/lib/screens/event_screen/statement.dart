@@ -1,4 +1,3 @@
-// event_data.dart
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -21,12 +20,12 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      eventId: json['event_id'],
-      title: json['event_title'],
-      description: json['event_description'],
-      hour: json['hour'],
-      hourEnd: json['hour_end'],
-      room: json['room'],
+      eventId: json['event_id'] ?? 0, 
+      title: json['event_title'] ?? 'Untitled Event', 
+      description: json['event_description'] ?? 'No description available',
+      hour: json['hour'] ?? '00:00', 
+      hourEnd: json['hour_end'] ?? '00:00', 
+      room: json['room'] ?? 'Unknown Room', 
     );
   }
 }
@@ -42,8 +41,7 @@ class DayEvent {
 
   factory DayEvent.fromJson(Map<String, dynamic> json) {
     var eventsFromJson = json['events'] as List;
-    List<Event> eventList =
-        eventsFromJson.map((eventJson) => Event.fromJson(eventJson)).toList();
+    List<Event> eventList = eventsFromJson.map((eventJson) => Event.fromJson(eventJson)).toList();
 
     return DayEvent(
       day: json['day'],
@@ -77,17 +75,16 @@ class EventDetail {
 
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     var speakersFromJson = json['speakers'] as List;
-    List<Speaker> speakerList =
-        speakersFromJson.map((speakerJson) => Speaker.fromJson(speakerJson)).toList();
+    List<Speaker> speakerList = speakersFromJson.map((speakerJson) => Speaker.fromJson(speakerJson)).toList();
 
     return EventDetail(
       eventId: json['event_id'],
-      title: json['event_title'],
-      description: json['event_description'],
+      title: json['event_title'] ?? 'Untitled Event', 
+      description: json['event_description'] ?? 'No description available', 
       day: json['day'],
-      hour: json['hour'],
-      hourEnd: json['hour_end'],
-      room: json['room'],
+      hour: json['hour'] ?? '00:00',
+      hourEnd: json['hour_end'] ?? '00:00', 
+      room: json['room'] ?? 'Unknown Room', 
       location: Location.fromJson(json['location']),
       speakers: speakerList,
     );
@@ -106,7 +103,7 @@ class Location {
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
       id: json['id'],
-      description: json['description'],
+      description: json['description'] ?? 'Location not available', // Fallback for null description
     );
   }
 }
@@ -125,8 +122,8 @@ class Speaker {
   factory Speaker.fromJson(Map<String, dynamic> json) {
     return Speaker(
       id: json['id'],
-      name: json['name'],
-      image: json['image'],
+      name: json['name'] ?? 'Unknown Speaker', 
+      image: json['image'] ?? '', 
     );
   }
 }
@@ -134,7 +131,7 @@ class Speaker {
 class EventData {
   static const String baseUrl = 'https://server-production-2c4b.up.railway.app';
 
-  // Método para obtener todos los eventos por día
+  // Fetch all events
   static Future<List<DayEvent>> fetchAllEvents() async {
     final response = await http.get(Uri.parse('$baseUrl/events'));
 
@@ -146,7 +143,7 @@ class EventData {
     }
   }
 
-  // Método para obtener los detalles de un evento específico por ID
+  // Fetch event detail by event ID
   static Future<EventDetail> fetchEventDetail(int eventId) async {
     final response = await http.get(Uri.parse('$baseUrl/events/$eventId'));
 
