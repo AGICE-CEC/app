@@ -23,22 +23,23 @@ class _EventPageScreenState extends State<EventPageScreen> {
   }
 
   Color getRoomColor(String room) {
-    if (room.startsWith('CIT-1')) {
-      return Colors.blue;
-    } else if (room.startsWith('CIT-2')) {
-      return Colors.green;
-    } else if (room.startsWith('CIT-3')) {
-      return Colors.red;
-    } else if (room.startsWith('CIT-4')) {
-      return Colors.orange;
-    } else if (room.startsWith('CIT-5')) {
-      return Colors.yellow;
-    } else if (room.startsWith('CIT-6')) {
-      return Colors.teal;
-    } else if (room.startsWith('CIT-7')) {
-      return Colors.purple;
-    } else {
-      return Colors.grey;
+    switch (room) {
+      case 'CIT - Plaza Dra. Isabel Gutiérrez de Bosch.png':
+      case 'Cafetería.png':
+      case 'CIT - Plaza.png':
+        return Colors.green; 
+
+      case 'Plaza Paiz Riera.png':
+      case 'I - 100.png':
+      case 'F - 101.png':
+        return Colors.blue; 
+
+      case 'CIT - 727.png':
+      case 'CIT - 705.png':
+        return Colors.purple; 
+
+      default:
+        return Colors.grey; 
     }
   }
 
@@ -196,17 +197,15 @@ class _EventPageScreenState extends State<EventPageScreen> {
                       children: [
                         Flexible(
                           child: Text(
-                            event.room,
+                            event.room.replaceAll('.png', ''),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
-                            overflow: TextOverflow.ellipsis, 
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const SizedBox(width: 8.0),
-                        const Icon(Icons.help_outline, color: Colors.white),
                       ],
                     ),
                   ),

@@ -6,7 +6,6 @@ class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _EventsPageState createState() => _EventsPageState();
 }
 
@@ -19,23 +18,24 @@ class _EventsPageState extends State<EventsPage> {
     futureEvents = EventData.fetchAllEvents();
   }
 
-  Color getRoomColor(String room) {
-    if (room.startsWith('CIT-1')) {
-      return Colors.blue;
-    } else if (room.startsWith('CIT-2')) {
-      return Colors.green;
-    } else if (room.startsWith('CIT-3')) {
-      return Colors.red;
-    } else if (room.startsWith('CIT-4')) {
-      return Colors.orange;
-    } else if (room.startsWith('CIT-5')) {
-      return Colors.yellow;
-    } else if (room.startsWith('CIT-6')) {
-      return Colors.teal;
-    } else if (room.startsWith('CIT-7')) {
-      return Colors.purple;
-    } else {
-      return Colors.grey;
+  Color getRoomTextColor(String room) {
+    switch (room) {
+      case 'CIT - Plaza Dra. Isabel Gutiérrez de Bosch':
+      case 'Cafetería':
+      case 'CIT - Plaza':
+        return Colors.green.shade700; 
+
+      case 'Plaza Paiz Riera':
+      case 'I - 100':
+      case 'F - 101':
+        return Colors.blue.shade700; 
+
+      case 'CIT - 727':
+      case 'CIT - 705':
+        return Colors.purple.shade700; 
+
+      default:
+        return Colors.grey.shade700; 
     }
   }
 
@@ -162,16 +162,22 @@ class _EventsPageState extends State<EventsPage> {
                                                       horizontal: 8.0,
                                                       vertical: 4.0),
                                                   decoration: BoxDecoration(
-                                                    color: getRoomColor(
-                                                        event.room),
+                                                    color: Colors.white,
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.0),
+                                                        BorderRadius.only(
+                                                      bottomRight:
+                                                          Radius.circular(8.0),
+                                                      topLeft:
+                                                          Radius.circular(8.0),
+                                                    ),
                                                   ),
                                                   child: Text(
                                                     event.room,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
+                                                    style: TextStyle(
+                                                      color: getRoomTextColor(
+                                                          event.room),
+                                                      fontWeight:
+                                                          FontWeight.bold, 
                                                       fontFamily: 'Roboto',
                                                     ),
                                                   ),
