@@ -269,7 +269,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                       ),
                                     ),
                                     child: const Text(
-                                      "Registrate",
+                                      "Ingresa",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,

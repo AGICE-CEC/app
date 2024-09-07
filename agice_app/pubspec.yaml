@@ -62,4 +62,5 @@ flutter:
     - assets/fondo.jpg
     - assets/cec2024.png
     - assets/astronatua.png
+    - shorebird.yaml
   uses-material-design: true
