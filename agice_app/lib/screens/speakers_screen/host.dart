@@ -28,12 +28,12 @@ class Presentador {
 
       return data.map((json) {
         return Presentador(
-          nombre: json['speakerName'],
-          pais: json['country'],
-          descripcion: json['speakerDescription'],
-          contacto: json['contact'],
-          fotoUrl: json['speakerImage'],
-          linkedinUrl: json['linkedIn'],
+          nombre: json['speakerName'] ?? '',
+          pais: json['country'] ?? '',
+          descripcion: json['speakerDescription'] ?? '',
+          contacto: json['contact'] ?? '',
+          fotoUrl: json['speakerImage'] ?? '',
+          linkedinUrl: json['linkedIn'] ?? 'null',
         );
       }).toList();
     } else {
