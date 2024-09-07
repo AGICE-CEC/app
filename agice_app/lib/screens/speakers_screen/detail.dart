@@ -24,40 +24,36 @@ class PantallaDetalle extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         color: const Color.fromRGBO(84, 84, 84, 1),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              presentador.nombre,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
             const SizedBox(height: 8),
-            Text(
-              presentador.descripcion,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white70,
+            Container(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: SingleChildScrollView(
+                child: Text(
+                  presentador.descripcion,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white70,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             CircleAvatar(
-              radius: 80,
+              radius: 70,
               backgroundImage: NetworkImage(presentador.fotoUrl),
             ),
             const SizedBox(height: 24),
             IconButton(
               icon: const FaIcon(FontAwesomeIcons.linkedin),
               color: Colors.white,
-              iconSize: 40,
+              iconSize: 45,
               onPressed: () async {
                 final Uri url = Uri.parse(presentador.linkedinUrl);
                 if (await canLaunchUrl(url)) {
