@@ -30,6 +30,11 @@ class PantallaDetalle extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(height: 16),
+            CircleAvatar(
+              radius: 70,
+              backgroundImage: NetworkImage(presentador.fotoUrl),
+            ),
             const SizedBox(height: 8),
             Container(
               constraints: const BoxConstraints(maxHeight: 300),
@@ -44,24 +49,22 @@ class PantallaDetalle extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            CircleAvatar(
-              radius: 70,
-              backgroundImage: NetworkImage(presentador.fotoUrl),
-            ),
             const SizedBox(height: 24),
-            IconButton(
-              icon: const FaIcon(FontAwesomeIcons.linkedin),
-              color: Colors.white,
-              iconSize: 45,
-              onPressed: () async {
-                final Uri url = Uri.parse(presentador.linkedinUrl);
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url);
-                } else {
-                  throw 'No se pudo abrir $url';
-                }
-              },
+            Visibility(
+              visible: presentador.linkedinUrl != "null",
+              child: IconButton(
+                icon: const FaIcon(FontAwesomeIcons.linkedin),
+                color: Colors.white,
+                iconSize: 40,
+                onPressed: () async {
+                  final Uri url = Uri.parse(presentador.linkedinUrl);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  } else {
+                    throw 'No se pudo abrir $url';
+                  }
+                },
+              ),
             ),
           ],
         ),
