@@ -1,8 +1,10 @@
+import 'package:agice_app/screens/event_screen/eventos_screen.dart';
 import 'package:agice_app/screens/faq_screen/faq.dart';
 import 'package:agice_app/screens/map_screen.dart';
 import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
 import 'package:flutter/material.dart';
-import '../event_screen/main_event_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -12,11 +14,29 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
+Future<void> _checkRegistrationStatus(BuildContext context) async {
+  final prefs = await SharedPreferences.getInstance();
+  final registrado = prefs.getBool('isLogin') ?? false;
+
+  if (!registrado) {
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushReplacementNamed('/registration');
+  }
+}
+
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 1), () {
+      _checkRegistrationStatus(context);
+    });
+  }
+
   final List<Widget> _pages = [
-    const MainEventsScreen(),
+    const EventsPage(),
     const MainSpeakerScreen(),
     const MapScreen(),
     const FAQPage()

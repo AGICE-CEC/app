@@ -3,6 +3,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,9 +12,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  OneSignal.initialize("1cb74d81-5e43-411f-bb8a-22828e6d385a");
-  OneSignal.Notifications.requestPermission(true);
-  runApp(const MyApp());
+  if (!kIsWeb) {
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    OneSignal.initialize("1cb74d81-5e43-411f-bb8a-22828e6d385a");
+    OneSignal.Notifications.requestPermission(true);
+  }
 
+  runApp(const MyApp());
 }
