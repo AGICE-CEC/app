@@ -1,7 +1,7 @@
 import 'package:agice_app/screens/event_screen/eventos_screen.dart';
 import 'package:agice_app/screens/faq_screen/faq.dart';
 import 'package:agice_app/screens/map_screen.dart';
-import 'package:agice_app/screens/speakers_screen/main_speaker_screen.dart';
+import 'package:agice_app/screens/speakers_screen/acordeon.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const EventsPage(),
-    const MainSpeakerScreen(),
+    const PantallaPresentadores(),
     const MapScreen(),
     const FAQPage()
   ];

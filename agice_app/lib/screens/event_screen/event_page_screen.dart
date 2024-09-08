@@ -45,11 +45,11 @@ class _EventPageScreenState extends State<EventPageScreen> {
   Presentador convertSpeakerToPresentador(Speaker speaker) {
     return Presentador(
       nombre: speaker.name,
-      pais: "", 
-      descripcion: "", 
-      contacto: "", 
+      pais: "",
+      descripcion: "",
+      contacto: "",
       fotoUrl: speaker.image,
-      linkedinUrl: "", 
+      linkedinUrl: "",
     );
   }
 
@@ -59,6 +59,8 @@ class _EventPageScreenState extends State<EventPageScreen> {
       backgroundColor: Colors.grey.shade900, // Background color of the screen
       appBar: AppBar(
         backgroundColor: Colors.black,
+        iconTheme:
+            const IconThemeData(color: Colors.white), // Set all icons to white
         leading: IconButton(
           icon: const Icon(Icons.arrow_back), // Icon to go back
           onPressed: () {
@@ -128,35 +130,42 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     color: Colors.grey.shade800,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: event.speakers.map((speaker) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PantallaDetalle(presentador: convertSpeakerToPresentador(speaker)),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: event.speakers.map((speaker) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PantallaDetalle(
+                                    presentador:
+                                        convertSpeakerToPresentador(speaker)),
+                              ),
+                            );
+                          },
+                          child: SizedBox(
+                            width: 120,
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(speaker.image),
+                                  radius: 30,
+                                ),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  speaker.name,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(color: Colors.white),
+                                  maxLines: 2,
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(speaker.image),
-                              radius: 30,
-                            ),
-                            const SizedBox(height: 8.0),
-                            Text(
-                              speaker.name,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24.0),
@@ -168,7 +177,9 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                     color: Colors.grey.shade800,
                   ),
-                  child: MapScreen(location: event.location.description), // Aquí se pasa la ubicación
+                  child: MapScreen(
+                      location: event
+                          .location.description), // Aquí se pasa la ubicación
                 ),
                 const Spacer(),
                 // Button to show event room or related information
@@ -176,7 +187,8 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 8.0),
                   decoration: BoxDecoration(
-                    color: getRoomColor(event.room), // Apply the dynamic color here
+                    color: getRoomColor(
+                        event.room), // Apply the dynamic color here
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Row(
@@ -186,7 +198,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
                         event.room,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 18.0,
+                          fontSize: 14.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

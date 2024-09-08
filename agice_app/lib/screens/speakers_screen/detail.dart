@@ -26,9 +26,7 @@ class PantallaDetalle extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
         color: const Color.fromRGBO(84, 84, 84, 1),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: <Widget>[
             Text(
               presentador.nombre,

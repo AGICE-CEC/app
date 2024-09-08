@@ -299,7 +299,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   ButtonStyle _buildSubmitButtonStyle() {
     return TextButton.styleFrom(
-      backgroundColor: const Color(0xFF848484),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
     );
   }

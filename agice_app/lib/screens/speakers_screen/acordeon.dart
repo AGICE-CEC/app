@@ -6,11 +6,10 @@ class ListaPresentadores extends StatefulWidget {
   const ListaPresentadores({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ListaPresentadoresState createState() => _ListaPresentadoresState();
+  ListaPresentadoresState createState() => ListaPresentadoresState();
 }
 
-class _ListaPresentadoresState extends State<ListaPresentadores> {
+class ListaPresentadoresState extends State<ListaPresentadores> {
   List<Presentador> presentadores = [];
   bool isLoading = true;
 
@@ -23,36 +22,21 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
   Future<void> fetchPresentadores() async {
     try {
       List<Presentador> lista = await Presentador.buildSpeakersList();
+      if (lista.isEmpty) {
+        print('No presenters found'); // Debugging log
+      } else {
+        print('Presenters fetched: ${lista.length}'); // Debugging log
+      }
       setState(() {
         presentadores = lista;
         isLoading = false;
       });
     } catch (e) {
+      print('Error fetching presenters: $e'); // Debugging log
       setState(() {
         isLoading = false;
       });
-    }
-  }
-
-  Color getTextColorForSalon(String salon) {
-    final salonNumber = int.tryParse(salon.split('-')[1]) ?? 0;
-    switch (salonNumber.toString()[0]) {
-      case '1':
-        return const Color.fromRGBO(23, 122, 194, 1.0);
-      case '2':
-        return const Color.fromRGBO(42, 167, 31, 1.0);
-      case '3':
-        return const Color.fromRGBO(206, 44, 44, 1.0);
-      case '4':
-        return const Color.fromRGBO(247, 125, 40, 1.0);
-      case '5':
-        return const Color.fromRGBO(254, 180, 25, 1.0);
-      case '6':
-        return const Color.fromRGBO(19, 150, 158, 1.0);
-      case '7':
-        return const Color.fromRGBO(134, 42, 132, 1.0);
-      default:
-        return Colors.black;
+      // Optionally: Show an error message to the user
     }
   }
 
@@ -62,47 +46,60 @@ class _ListaPresentadoresState extends State<ListaPresentadores> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    // Show a message if the list is empty
+    if (presentadores.isEmpty) {
+      return const Center(
+        child: Text(
+          'No presenters available at the moment',
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+      );
+    }
+
     return ListView.builder(
-      padding: const EdgeInsets.all(12.0), // Añade margen alrededor de la lista
+      padding: const EdgeInsets.all(12.0),
       itemCount: presentadores.length,
       itemBuilder: (context, index) {
         final presentador = presentadores[index];
+
+        // Provide defaults for nullable fields
+        final String fotoUrl =
+            presentador.fotoUrl ?? ''; // Default to empty string
+        final String nombre = presentador.nombre ??
+            'Nombre no disponible'; // Default to 'Nombre no disponible'
+        final String descripcion = presentador.descripcion ??
+            'Sin descripción'; // Default to 'Sin descripción'
+
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Container(
-            width: double.infinity,
-            padding:
-                const EdgeInsets.all(0.0), // Sin margen interno para la foto
             decoration: BoxDecoration(
               color: Colors.grey[700],
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12.0),
-                    bottomLeft: Radius.circular(12.0),
-                  ),
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(presentador.fotoUrl),
-                        fit: BoxFit.cover,
-                      ),
+                if (fotoUrl.isNotEmpty)
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      bottomLeft: Radius.circular(12.0),
+                    ),
+                    child: Image.network(
+                      fotoUrl,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
                 Expanded(
                   child: ListTile(
                     title: Text(
-                      presentador.nombre,
+                      nombre,
                       style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      presentador.descripcion,
+                      descripcion,
                       style: const TextStyle(color: Colors.white),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

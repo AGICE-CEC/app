@@ -1,6 +1,6 @@
 import 'package:agice_app/screens/event_screen/eventos_screen.dart';
+import 'package:agice_app/screens/speakers_screen/acordeon.dart';
 
-import '../screens/speakers_screen/main_speaker_screen.dart';
 import '../screens/registration_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../screens/map_screen.dart';
@@ -12,6 +12,6 @@ class AppRoutes {
     '/mapa': (context) => const MapScreen(),
     '/main': (context) => const MainScreen(),
     '/events': (context) => const EventsPage(),
-    '/speakers': (context) => const MainSpeakerScreen(),
+    '/speakers': (context) => const PantallaPresentadores(),
   };
 }
