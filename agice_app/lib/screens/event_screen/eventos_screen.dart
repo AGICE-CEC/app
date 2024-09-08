@@ -19,6 +19,26 @@ class _EventsPageState extends State<EventsPage> {
     futureEvents = EventData.fetchAllEvents();
   }
 
+  Color getRoomColor(String room) {
+    if (room.startsWith('CIT-1')) {
+      return Colors.blue;
+    } else if (room.startsWith('CIT-2')) {
+      return Colors.green;
+    } else if (room.startsWith('CIT-3')) {
+      return Colors.red;
+    } else if (room.startsWith('CIT-4')) {
+      return Colors.orange;
+    } else if (room.startsWith('CIT-5')) {
+      return Colors.yellow;
+    } else if (room.startsWith('CIT-6')) {
+      return Colors.teal;
+    } else if (room.startsWith('CIT-7')) {
+      return Colors.purple;
+    } else {
+      return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,8 +122,7 @@ class _EventsPageState extends State<EventsPage> {
                                     );
                                   },
                                   borderRadius: BorderRadius.circular(8.0),
-                                  splashColor: Colors
-                                      .grey.shade800, // Color al hacer click
+                                  splashColor: Colors.grey.shade800,
                                   child: Container(
                                     width: double.infinity,
                                     margin: const EdgeInsets.symmetric(
@@ -119,15 +138,46 @@ class _EventsPageState extends State<EventsPage> {
                                             horizontal: 16.0,
                                             vertical: 24.0,
                                           ),
-                                          child: Text(
-                                            event.title,
-                                            style: const TextStyle(
-                                              fontSize: 16.0,
-                                              color: Colors.white,
-                                              fontFamily: 'Roboto',
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                event.title,
+                                                style: const TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: Colors.white,
+                                                  fontFamily: 'Roboto',
+                                                ),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const SizedBox(height: 8.0),
+                                              Align(
+                                                alignment:
+                                                    Alignment.bottomRight,
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 4.0),
+                                                  decoration: BoxDecoration(
+                                                    color: getRoomColor(
+                                                        event.room),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  child: Text(
+                                                    event.room,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: 'Roboto',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],

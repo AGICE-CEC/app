@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'statement.dart';
+import 'package:agice_app/screens/speakers_screen/detail.dart';
+import 'package:agice_app/screens/speakers_screen/host.dart';
+import 'package:agice_app/screens/map_screen.dart'; // Asegúrate de importar MapScreen
 
 class EventPageScreen extends StatefulWidget {
   final int eventId;
@@ -7,7 +10,6 @@ class EventPageScreen extends StatefulWidget {
   const EventPageScreen({super.key, required this.eventId});
 
   @override
-  // ignore: library_private_types_in_public_api
   _EventPageScreenState createState() => _EventPageScreenState();
 }
 
@@ -20,16 +22,47 @@ class _EventPageScreenState extends State<EventPageScreen> {
     futureEventDetail = EventData.fetchEventDetail(widget.eventId);
   }
 
+  Color getRoomColor(String room) {
+    if (room.startsWith('CIT-1')) {
+      return Colors.blue;
+    } else if (room.startsWith('CIT-2')) {
+      return Colors.green;
+    } else if (room.startsWith('CIT-3')) {
+      return Colors.red;
+    } else if (room.startsWith('CIT-4')) {
+      return Colors.orange;
+    } else if (room.startsWith('CIT-5')) {
+      return Colors.yellow;
+    } else if (room.startsWith('CIT-6')) {
+      return Colors.teal;
+    } else if (room.startsWith('CIT-7')) {
+      return Colors.purple;
+    } else {
+      return Colors.grey;
+    }
+  }
+
+  Presentador convertSpeakerToPresentador(Speaker speaker) {
+    return Presentador(
+      nombre: speaker.name,
+      pais: "", 
+      descripcion: "", 
+      contacto: "", 
+      fotoUrl: speaker.image,
+      linkedinUrl: "", 
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900, // Fondo de la pantalla
+      backgroundColor: Colors.grey.shade900, // Background color of the screen
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // Icono para regresar
+          icon: const Icon(Icons.arrow_back), // Icon to go back
           onPressed: () {
-            Navigator.pop(context); // Acción para regresar a la vista anterior
+            Navigator.pop(context); // Action to go back to the previous screen
           },
         ),
       ),
@@ -51,6 +84,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Event title
                 Text(
                   event.title,
                   style: const TextStyle(
@@ -60,6 +94,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   ),
                 ),
                 const SizedBox(height: 8.0),
+                // Event time and day
                 Row(
                   children: [
                     const Icon(Icons.access_time, color: Colors.white),
@@ -71,11 +106,13 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   ],
                 ),
                 const SizedBox(height: 16.0),
+                // Event description
                 Text(
                   event.description,
                   style: const TextStyle(color: Colors.white70),
                 ),
                 const SizedBox(height: 24.0),
+                // Section for speakers
                 const Text(
                   'Impartido por',
                   style: TextStyle(
@@ -84,6 +121,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   ),
                 ),
                 const SizedBox(height: 8.0),
+                // Speakers list with navigation
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
@@ -93,24 +131,36 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: event.speakers.map((speaker) {
-                      return Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(speaker.image),
-                            radius: 30,
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            speaker.name,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PantallaDetalle(presentador: convertSpeakerToPresentador(speaker)),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(speaker.image),
+                              radius: 30,
+                            ),
+                            const SizedBox(height: 8.0),
+                            Text(
+                              speaker.name,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       );
                     }).toList(),
                   ),
                 ),
                 const SizedBox(height: 24.0),
+                // Map or image related to the event
                 Container(
                   width: double.infinity,
                   height: 200.0,
@@ -118,16 +168,15 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                     color: Colors.grey.shade800,
                   ),
-                  child: const Center(
-                    child: Icon(Icons.map, color: Colors.white, size: 50.0),
-                  ),
+                  child: MapScreen(location: event.location.description), // Aquí se pasa la ubicación
                 ),
                 const Spacer(),
+                // Button to show event room or related information
                 Container(
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 8.0),
                   decoration: BoxDecoration(
-                    color: Colors.teal,
+                    color: getRoomColor(event.room), // Apply the dynamic color here
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Row(
