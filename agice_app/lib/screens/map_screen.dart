@@ -16,11 +16,13 @@ class _MapScreenState extends State<MapScreen> {
     String url =
         'https://app.mappedin.com/map/66b14e6126fe2b000a5045d0?embedded=true&location=${widget.location}';
 
-    return WebViewX(
-      width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height,
-      initialContent: url,
-      initialSourceType: SourceType.url,
+    return SafeArea(
+      child: WebViewX(
+        width: MediaQuery.sizeOf(context).width,
+        height: MediaQuery.sizeOf(context).height,
+        initialContent: url,
+        initialSourceType: SourceType.url,
+      ),
     );
   }
 }
