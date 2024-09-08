@@ -269,7 +269,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                       ),
                                     ),
                                     child: const Text(
-                                      "Ingresa",
+                                      "Ingresar",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,
@@ -298,7 +298,7 @@ class _RegistrationScreen extends State<RegistrationScreen> {
                                         ),
                                       ),
                                       child: const Text(
-                                        "Ver Mas",
+                                        "Ver Más",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
