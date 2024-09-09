@@ -199,7 +199,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        event.room,
+                        event.room.replaceAll(".png", ""),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14.0,
@@ -209,6 +209,10 @@ class _EventPageScreenState extends State<EventPageScreen> {
                       const SizedBox(width: 8.0),
                     ],
                   ),
+                ),
+
+                SizedBox(
+                  height: 40,
                 ),
               ],
             ),
