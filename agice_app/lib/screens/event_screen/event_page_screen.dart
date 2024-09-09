@@ -168,46 +168,53 @@ class _EventPageScreenState extends State<EventPageScreen> {
                   ),
                 ),
                 const SizedBox(height: 24.0),
-                // Map or image related to the event
-                Container(
-                  width: double.infinity,
-                  height: 400.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.grey.shade800,
-                  ),
-                  child: MapScreen(
-                      location: event.location.id
-                          .toString()), // Aquí se pasa la ubicación
-                ),
-                const Spacer(),
-                // Button to show event room or related information
-                SizedBox(
-                  height: 24,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24.0,
-                    horizontal: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: getRoomColor(
-                        event.room), // Apply the dynamic color here
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        event.room.replaceAll(".png", ""),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    if (event.location.description.isEmpty) {
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MapScreen(
+                          url: event.location.description.toString(),
                         ),
                       ),
-                      const SizedBox(width: 8.0),
-                    ],
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24.0,
+                      horizontal: 8.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: getRoomColor(
+                          event.room), // Apply the dynamic color here
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          event.room.replaceAll(".png", ""),
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 40.0),
+                        if (event.location.description.isNotEmpty)
+                          const Text(
+                            "Abrir mapa",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        const SizedBox(width: 8.0),
+                      ],
+                    ),
                   ),
                 ),
 
