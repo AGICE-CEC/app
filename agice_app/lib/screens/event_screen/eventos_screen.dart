@@ -43,17 +43,10 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Eventos',
             style: TextStyle(fontFamily: 'Roboto', color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              // Acción al presionar el icono
-            },
-          ),
-        ],
       ),
       body: FutureBuilder<List<DayEvent>>(
         future: futureEvents,
@@ -158,7 +151,7 @@ class _EventsPageState extends State<EventsPage> {
                                                     Alignment.bottomRight,
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 4.0),
                                                   decoration: BoxDecoration(

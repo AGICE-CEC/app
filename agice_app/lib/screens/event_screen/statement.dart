@@ -77,8 +77,9 @@ class EventDetail {
 
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     var speakersFromJson = json['speakers'] as List;
-    List<Speaker> speakerList =
-        speakersFromJson.map((speakerJson) => Speaker.fromJson(speakerJson)).toList();
+    List<Speaker> speakerList = speakersFromJson
+        .map((speakerJson) => Speaker.fromJson(speakerJson))
+        .toList();
 
     return EventDetail(
       eventId: json['event_id'],
@@ -140,7 +141,9 @@ class EventData {
 
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body) as List;
-      return jsonResponse.map((dayEventJson) => DayEvent.fromJson(dayEventJson)).toList();
+      return jsonResponse
+          .map((dayEventJson) => DayEvent.fromJson(dayEventJson))
+          .toList();
     } else {
       throw Exception('Failed to load events');
     }

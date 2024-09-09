@@ -83,8 +83,7 @@ class _EventPageScreenState extends State<EventPageScreen> {
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
               children: [
                 // Event title
                 Text(
@@ -172,20 +171,25 @@ class _EventPageScreenState extends State<EventPageScreen> {
                 // Map or image related to the event
                 Container(
                   width: double.infinity,
-                  height: 200.0,
+                  height: 400.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     color: Colors.grey.shade800,
                   ),
                   child: MapScreen(
-                      location: event
-                          .location.description), // Aquí se pasa la ubicación
+                      location: event.location.id
+                          .toString()), // Aquí se pasa la ubicación
                 ),
                 const Spacer(),
                 // Button to show event room or related information
+                SizedBox(
+                  height: 24,
+                ),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 8.0),
+                    vertical: 24.0,
+                    horizontal: 8.0,
+                  ),
                   decoration: BoxDecoration(
                     color: getRoomColor(
                         event.room), // Apply the dynamic color here
@@ -203,7 +207,6 @@ class _EventPageScreenState extends State<EventPageScreen> {
                         ),
                       ),
                       const SizedBox(width: 8.0),
-                      const Icon(Icons.help_outline, color: Colors.white),
                     ],
                   ),
                 ),

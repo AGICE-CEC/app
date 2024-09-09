@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const EventsPage(),
     const PantallaPresentadores(),
-    const MapScreen(),
+    const MapScreen(showMessage: true),
     const FAQPage()
   ];
 
@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.black,
+        selectedItemColor: Colors.blue[800],
         showUnselectedLabels: true,
         showSelectedLabels: true,
       ),

@@ -12,8 +12,7 @@ class PantallaDetalle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(presentador.nombre,
-            style: const TextStyle(color: Colors.white)),
+        title: const Text("", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.grey[900],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -47,9 +46,15 @@ class PantallaDetalle extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            CircleAvatar(
-              radius: 80,
-              backgroundImage: NetworkImage(presentador.fotoUrl),
+            Center(
+              child: ClipOval(
+                child: Image.network(
+                  presentador.fotoUrl,
+                  width: 240, // diameter (2 * radius)
+                  height: 240,
+                  fit: BoxFit.cover, // Ensures the image covers the entire area
+                ),
+              ),
             ),
             const SizedBox(height: 24),
             IconButton(
