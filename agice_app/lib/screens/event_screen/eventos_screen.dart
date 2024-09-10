@@ -46,14 +46,6 @@ class _EventsPageState extends State<EventsPage> {
         title: const Text('Eventos',
             style: TextStyle(fontFamily: 'Roboto', color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              // Acción al presionar el icono
-            },
-          ),
-        ],
       ),
       body: FutureBuilder<List<DayEvent>>(
         future: futureEvents,

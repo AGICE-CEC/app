@@ -61,9 +61,12 @@ class _EventPageScreenState extends State<EventPageScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // Icon to go back
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white, 
+          ),
           onPressed: () {
-            Navigator.pop(context); // Action to go back to the previous screen
+            Navigator.pop(context); 
           },
         ),
       ),
